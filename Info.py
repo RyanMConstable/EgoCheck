@@ -15,6 +15,6 @@ if __name__ == "__main__":
     events = parser.list_game_events()
     
     #List of lists
-    #The main list contains lists of the format [steam username, steamid]
+    #The main list contains lists of the format [steam username, steamid, team number]
     players = parser.parse_event("player_team")
-    print(players[["user_name", "user_steamid"]].values.tolist())
+    list_players = players[["user_name", "user_steamid", "team"]].values.tolist()
