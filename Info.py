@@ -4,7 +4,7 @@ if __name__ == "__main__":
     print("Main started")
     
     #Testing my local dem file (This can be on git it's not sensitive data)
-    demoFile = "./match730_003716174692134945057_0469028642_129.dem"
+    demoFile = "./match730_003714199228369600597_0393609323_122.dem"
     
     #Set up the base parser info
     parser = DemoParser(demoFile)
@@ -13,7 +13,12 @@ if __name__ == "__main__":
     
     #List all events in the game
     events = parser.list_game_events()
-    #print(events)
+    print(events)
+    
+    #Setup map information or single information that might be needed
+    gameInfo = []
+    headers = parser.parse_header()
+    gameInfo.append(headers["map_name"])
     
     #List of lists
     #The main list contains lists of the format [steam username, steamid, team number]
@@ -22,5 +27,14 @@ if __name__ == "__main__":
     
     #Add kills for each user (added to the end of the current list for a player)
     player_death_df = parser.parse_event("player_death")
+    print(player_death_df.columns)
+    print(player_death_df.head(10))
     for player in list_players:
         player.append(len(player_death_df.loc[player_death_df["attacker_steamid"] == player[1]]))
+
+    print(list_players)
+    
+    #Testing things
+    temp_df = parser.parse_event("player_hurt")
+    print(temp_df)
+    print(temp_df.columns)
