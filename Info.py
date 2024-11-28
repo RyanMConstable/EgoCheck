@@ -36,13 +36,19 @@ if __name__ == "__main__":
     print()
     print(player_death_df.head())
     for player in playerInfo.keys():
+        #Basic kill stats
         playerInfo[player]["totalKills"] = len(player_death_df.loc[player_death_df["attacker_steamid"] == player])
         playerInfo[player]["assists"] = len(player_death_df.loc[player_death_df["assister_steamid"] == player])
         playerInfo[player]["totalDeaths"] = len(player_death_df.loc[player_death_df["user_steamid"] == player])
+        #Specific types of kill stats
         playerInfo[player]["smokeKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["thrusmoke"] == True)])
         playerInfo[player]["headshotKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["headshot"] == True)])
         playerInfo[player]["noscopeKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["noscope"] == True)])
-
+        playerInfo[player]["noscopeKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["noscope"] == True)])
+        playerInfo[player]["blindKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["attackerblind"] == True)])
+        #Average stats
+        playerInfo[player]["avgKillDistance"] = "%0.2f" % (sum(player_death_df.loc[(player_death_df["attacker_steamid"] == player), ["distance"]]["distance"])/(playerInfo[player]["totalKills"]))
+        #Can find out what weapon people killed with here: Field: "weapon"
     
     #Testing things
     temp_df = parser.parse_event("player_hurt")
