@@ -25,10 +25,13 @@ if __name__ == "__main__":
     #The main list contains lists of the format [steam username, steamid, team number]
     players = parser.parse_event("player_team")
     playerInfo = {}
-    for row in players.iterrows:
-        row["username"]
+    for index, row in players.iterrows():
+        userID = players.loc[index, "user_steamid"]
+        userName = players.loc[index, "user_name"]
+        playerInfo[userID] = {}
+        playerInfo[userID]["name"] = userName
     list_players = players[["user_name", "user_steamid", "team"]].values.tolist()
-    print(f"list_players = {list_players} \n")
+    print(f"list_players = {playerInfo} \n")
     
     #Add kills for each user (added to the end of the current list for a player)
     player_death_df = parser.parse_event("player_death")
