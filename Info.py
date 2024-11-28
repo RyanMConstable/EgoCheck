@@ -14,6 +14,7 @@ if __name__ == "__main__":
     #List all events in the game
     events = parser.list_game_events()
     print(events)
+    print()
     
     #Setup map information or single information that might be needed
     gameInfo = []
@@ -23,18 +24,27 @@ if __name__ == "__main__":
     #List of lists
     #The main list contains lists of the format [steam username, steamid, team number]
     players = parser.parse_event("player_team")
+    playerInfo = {}
+    for row in players.iterrows:
+        row["username"]
     list_players = players[["user_name", "user_steamid", "team"]].values.tolist()
+    print(f"list_players = {list_players} \n")
     
     #Add kills for each user (added to the end of the current list for a player)
     player_death_df = parser.parse_event("player_death")
     print(player_death_df.columns)
+    print()
     print(player_death_df.head(10))
+    print()
     for player in list_players:
         player.append(len(player_death_df.loc[player_death_df["attacker_steamid"] == player[1]]))
 
     print(list_players)
+    print()
     
     #Testing things
     temp_df = parser.parse_event("player_hurt")
     print(temp_df)
+    print()
     print(temp_df.columns)
+    print()
