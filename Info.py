@@ -21,33 +21,30 @@ if __name__ == "__main__":
     headers = parser.parse_header()
     gameInfo.append(headers["map_name"])
     
-    #List of lists
-    #The main list contains lists of the format [steam username, steamid, team number]
+    #Creates a dictionary of each player in the game
     players = parser.parse_event("player_team")
     playerInfo = {}
     for index, row in players.iterrows():
         userID = players.loc[index, "user_steamid"]
-        userName = players.loc[index, "user_name"]
         playerInfo[userID] = {}
-        playerInfo[userID]["name"] = userName
-    list_players = players[["user_name", "user_steamid", "team"]].values.tolist()
-    print(f"list_players = {playerInfo} \n")
+        playerInfo[userID]["name"] = players.loc[index, "user_name"]
+        playerInfo[userID]["team"] = players.loc[index, "team"]
     
     #Add kills for each user (added to the end of the current list for a player)
     player_death_df = parser.parse_event("player_death")
     print(player_death_df.columns)
     print()
-    print(player_death_df.head(10))
-    print()
-    for player in list_players:
-        player.append(len(player_death_df.loc[player_death_df["attacker_steamid"] == player[1]]))
+    print(player_death_df.head())
+    for player in playerInfo.keys():
+        playerInfo[player]["totalKills"] = len(player_death_df.loc[player_death_df["attacker_steamid"] == player])
+        playerInfo[player]["assists"] = len(player_death_df.loc[player_death_df["assister_steamid"] == player])
+        playerInfo[player]["totalDeaths"] = len(player_death_df.loc[player_death_df["user_steamid"] == player])
+        playerInfo[player]["smokeKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["thrusmoke"] == True)])
+        playerInfo[player]["headshotKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["headshot"] == True)])
+        playerInfo[player]["noscopeKills"] = len(player_death_df.loc[(player_death_df["attacker_steamid"] == player) & (player_death_df["noscope"] == True)])
 
-    print(list_players)
-    print()
     
     #Testing things
     temp_df = parser.parse_event("player_hurt")
-    print(temp_df)
-    print()
-    print(temp_df.columns)
-    print()
+    
+    print(playerInfo)
