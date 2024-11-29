@@ -52,10 +52,10 @@ if __name__ == "__main__":
         #Can find out what weapon people killed with here: Field: "weapon"
         playerInfo[player]["bulletsFired"] = len(fired_df.loc[fired_df["user_steamid"] == player])
         #Foodsteps
-        playerInfo[player]["totalFootsteps"] = len(footstep_df.loc[fired_df["user_steamid"] == player])
+        playerInfo[player]["totalFootsteps"] = len(footstep_df.loc[footstep_df["user_steamid"] == player])
         #Ranks
-        playerInfo[player]["newRank"] = len(player_death_df.loc[rank_df["rank_new"] == player])
-        playerInfo[player]["oldRank"] = len(player_death_df.loc[rank_df["rank_old"] == player])
+        playerInfo[player]["newRank"] = rank_df.loc[rank_df["user_steamid"] == player, ["rank_new"]].values[0][0]
+        playerInfo[player]["oldRank"] = rank_df.loc[rank_df["user_steamid"] == player, ["rank_old"]].values[0][0]
      
     #Testing things
     temp_df = parser.parse_event("rank_update")
