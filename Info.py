@@ -75,6 +75,8 @@ if __name__ == "__main__":
         playerInfo[player]["bombPickups"] = len(bomb_pickup_df.loc[bomb_pickup_df["user_steamid"] == player])
         #Bomb defused
         playerInfo[player]["bombDefused"] = len(defused_df.loc[defused_df["user_steamid"] == player])
+        #Jumps
+        playerInfo[player]["jumps"] = len(jump_df.loc[jump_df["user_steamid"] == player])
      
     #Testing things
     temp_df = parser.parse_event("bomb_defused")
