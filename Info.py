@@ -34,6 +34,7 @@ if __name__ == "__main__":
     player_death_df = parser.parse_event("player_death")
     fired_df = parser.parse_event("weapon_fire")
     footstep_df = parser.parse_event("player_footstep")
+    rank_df = parser.parse_event("rank_update")
     for player in playerInfo.keys():
         """Player_death_df"""
         #Basic kill stats
@@ -50,10 +51,14 @@ if __name__ == "__main__":
         playerInfo[player]["avgKillDistance"] = "%0.2f" % (sum(player_death_df.loc[(player_death_df["attacker_steamid"] == player), ["distance"]]["distance"])/(playerInfo[player]["totalKills"]))
         #Can find out what weapon people killed with here: Field: "weapon"
         playerInfo[player]["bulletsFired"] = len(fired_df.loc[fired_df["user_steamid"] == player])
+        #Foodsteps
         playerInfo[player]["totalFootsteps"] = len(footstep_df.loc[fired_df["user_steamid"] == player])
+        #Ranks
+        playerInfo[player]["newRank"] = len(player_death_df.loc[rank_df["rank_new"] == player])
+        playerInfo[player]["oldRank"] = len(player_death_df.loc[rank_df["rank_old"] == player])
      
     #Testing things
-    temp_df = parser.parse_event("player_footstep")
+    temp_df = parser.parse_event("rank_update")
     print(f"{temp_df.columns} \n")
     print(temp_df.head)
     
