@@ -9,6 +9,7 @@ if __name__ == "__main__":
     #Set up the base parser info
     parser = DemoParser(demoFile)
     event_df = parser.parse_event("player_death", player=["X", "Y"], other=["total_rounds_played"])
+    print(parser.parse_skins())
     ticks_df = parser.parse_ticks(["X", "Y"])
     
     #List all events in the game
