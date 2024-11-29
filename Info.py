@@ -33,6 +33,7 @@ if __name__ == "__main__":
     #Add kills for each user (added to the end of the current list for a player)
     player_death_df = parser.parse_event("player_death")
     fired_df = parser.parse_event("weapon_fire")
+    footstep_df = parser.parse_event("player_footstep")
     for player in playerInfo.keys():
         """Player_death_df"""
         #Basic kill stats
@@ -49,10 +50,11 @@ if __name__ == "__main__":
         playerInfo[player]["avgKillDistance"] = "%0.2f" % (sum(player_death_df.loc[(player_death_df["attacker_steamid"] == player), ["distance"]]["distance"])/(playerInfo[player]["totalKills"]))
         #Can find out what weapon people killed with here: Field: "weapon"
         playerInfo[player]["bulletsFired"] = len(fired_df.loc[fired_df["user_steamid"] == player])
+        playerInfo[player]["totalFootsteps"] = len(footstep_df.loc[fired_df["user_steamid"] == player])
      
     #Testing things
-    temp_df = parser.parse_event("weapon_fire")
-    print(temp_df.columns)
+    temp_df = parser.parse_event("player_footstep")
+    print(f"{temp_df.columns} \n")
     print(temp_df.head)
     
     print(playerInfo)
