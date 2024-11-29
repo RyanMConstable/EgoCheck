@@ -35,6 +35,7 @@ if __name__ == "__main__":
     fired_df = parser.parse_event("weapon_fire")
     footstep_df = parser.parse_event("player_footstep")
     rank_df = parser.parse_event("rank_update")
+    bomb_df = parser.parse_event("bomb_dropped")
     for player in playerInfo.keys():
         """Player_death_df"""
         #Basic kill stats
@@ -56,9 +57,12 @@ if __name__ == "__main__":
         #Ranks
         playerInfo[player]["newRank"] = rank_df.loc[rank_df["user_steamid"] == player, ["rank_new"]].values[0][0]
         playerInfo[player]["oldRank"] = rank_df.loc[rank_df["user_steamid"] == player, ["rank_old"]].values[0][0]
+        #Bomb dropped
+        playerInfo[player]["bombDropped"] = len(bomb_df.loc[bomb_df["user_steamid"] == player])
+     
      
     #Testing things
-    temp_df = parser.parse_event("rank_update")
+    temp_df = parser.parse_event("bomb_dropped")
     print(f"{temp_df.columns} \n")
     print(temp_df.head)
     
