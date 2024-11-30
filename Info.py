@@ -1,10 +1,10 @@
 from demoparser2 import DemoParser
+import argparse
 
-if __name__ == "__main__":
-    print("Main started")
-    
+
+def parseDem(file):
     #Testing my local dem file (This can be on git it's not sensitive data)
-    demoFile = "./match730_003714199228369600597_0393609323_122.dem"
+    demoFile = "./match730_003716174692134945057_0469028642_129.dem"
     
     #Set up the base parser info
     parser = DemoParser(demoFile)
@@ -107,3 +107,11 @@ if __name__ == "__main__":
     print(temp_df.head)
     
     print(playerInfo)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+                    prog='Parse Demo',
+                    description='This program takes in a cs dem file and returns a ',
+                    epilog='Text at the bottom of help')
+    
+    parseDem("file")
