@@ -44,11 +44,14 @@ if __name__ == "__main__":
     defused_df = parser.parse_event("bomb_defused")
     chat_df = parser.parse_event("chat_message")
     round_end_df = parser.parse_event("cs_round_final_beep")
+    game_end_df = parser.parse_event("round_announce_final")
     
     
     roundEnd = []
     for index, row in round_end_df.iterrows():
         roundEnd.append([row["tick"], row["tick"]/64, (row["tick"]/64)/60])
+        
+    roundEndTick = game_end_df["tick"].values[0]
         
         
     for player in playerInfo.keys():
@@ -93,7 +96,7 @@ if __name__ == "__main__":
         
         
     #Testing things
-    temp_df = parser.parse_event("cs_round_final_beep")
+    temp_df = parser.parse_event("round_announce_final")
     print(f"{temp_df.columns} \n")
     print(temp_df.head)
     
