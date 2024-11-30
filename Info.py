@@ -9,7 +9,6 @@ if __name__ == "__main__":
     #Set up the base parser info
     parser = DemoParser(demoFile)
     event_df = parser.parse_event("player_death", player=["X", "Y"], other=["total_rounds_played"])
-    print(parser.parse_skins())
     ticks_df = parser.parse_ticks(["X", "Y"])
     
     #List all events in the game
@@ -44,6 +43,14 @@ if __name__ == "__main__":
     jump_df = parser.parse_event("player_jump")
     defused_df = parser.parse_event("bomb_defused")
     chat_df = parser.parse_event("chat_message")
+    round_end_df = parser.parse_event("cs_round_final_beep")
+    
+    
+    roundEnd = []
+    for index, row in round_end_df.iterrows():
+        roundEnd.append([row["tick"], row["tick"]/64, (row["tick"]/64)/60])
+        
+        
     for player in playerInfo.keys():
         """Player_death_df"""
         #Basic kill stats
@@ -86,7 +93,7 @@ if __name__ == "__main__":
         
         
     #Testing things
-    temp_df = parser.parse_event("chat_message")
+    temp_df = parser.parse_event("cs_round_final_beep")
     print(f"{temp_df.columns} \n")
     print(temp_df.head)
     
