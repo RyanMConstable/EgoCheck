@@ -45,6 +45,7 @@ if __name__ == "__main__":
     chat_df = parser.parse_event("chat_message")
     round_end_df = parser.parse_event("cs_round_final_beep")
     game_end_df = parser.parse_event("round_announce_final")
+    game_start_df = parser.parse_event("round_announce_match_start")
     
     
     roundEnd = []
@@ -52,6 +53,9 @@ if __name__ == "__main__":
         roundEnd.append([row["tick"], row["tick"]/64, (row["tick"]/64)/60])
         
     roundEndTick = game_end_df["tick"].values[0]
+    
+    roundStartTick = game_start_df["tick"].values[0]
+    
         
         
     for player in playerInfo.keys():
