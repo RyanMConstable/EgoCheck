@@ -45,6 +45,7 @@ if __name__ == "__main__":
     chat_df = parser.parse_event("chat_message")
     round_end_df = parser.parse_event("cs_round_final_beep")
     game_end_df = parser.parse_event("round_announce_final")
+    game_end_offical_df = parser.parse_event("round_announce_final")
     game_start_df = parser.parse_event("round_announce_match_start")
     
     
@@ -56,7 +57,8 @@ if __name__ == "__main__":
     
     roundStartTick = game_start_df["tick"].values[0]
     
-        
+    roundOfficialEndTick = game_end_offical_df["tick"].values[0]
+    
         
     for player in playerInfo.keys():
         """Player_death_df"""
