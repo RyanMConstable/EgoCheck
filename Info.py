@@ -114,8 +114,12 @@ def parseDem(file):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-                    prog='Parse Demo',
-                    description='This program takes in a cs dem file and returns a ',
-                    epilog='Text at the bottom of help')
+                    prog='Counter Strike Demo Parser',
+                    description='This program takes in a cs dem file and returns two dictionaries one for the players and one for the map'
+    )
     
-    parseDem("file")
+    parser.add_argument('filename')
+    
+    args = parser.parse_args()
+    
+    parseDem(args.filename)
