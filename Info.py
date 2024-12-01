@@ -44,6 +44,7 @@ def parseDem(file):
     defused_df = parser.parse_event("bomb_defused")
     chat_df = parser.parse_event("chat_message")
     round_end_df = parser.parse_event("cs_round_final_beep")
+    round_start_df = parser.parse_event("cs_round_start_beep")
     game_end_df = parser.parse_event("round_announce_final")
     game_end_offical_df = parser.parse_event("round_announce_final")
     game_start_df = parser.parse_event("round_announce_match_start")
@@ -52,7 +53,9 @@ def parseDem(file):
     roundEnd = []
     for index, row in round_end_df.iterrows():
         roundEnd.append([row["tick"], row["tick"]/64, (row["tick"]/64)/60])
-        
+    
+    print(round_end_df)
+    print(round_start_df)
     roundEndTick = game_end_df["tick"].values[0]
     
     roundStartTick = game_start_df["tick"].values[0]
