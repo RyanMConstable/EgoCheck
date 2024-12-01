@@ -115,7 +115,7 @@ if __name__ == "__main__":
                     description='This program takes in a cs dem file and returns two dictionaries one for the players and one for the map'
     )
     
-    parser.add_argument('filename')
+    parser.add_argument('filename', help="Path to your .dem file NOT .dem.info file")
     
     args = parser.parse_args()
     
