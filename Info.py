@@ -112,10 +112,12 @@ def parseDem(demoFile):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
                     prog='Counter Strike Demo Parser',
-                    description='This program takes in a cs dem file and returns two dictionaries one for the players and one for the map'
+                    description='''\
+                        This program takes in a cs dem file and returns two dictionaries one for the players and one for the map
+                    '''
     )
     
-    parser.add_argument('filename', help="Path to your .dem file NOT .dem.info file")
+    parser.add_argument('filename', help="REQUIRED: Path to your .dem file NOT .dem.info file")
     
     args = parser.parse_args()
     
