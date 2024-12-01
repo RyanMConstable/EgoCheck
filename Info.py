@@ -2,10 +2,7 @@ from demoparser2 import DemoParser
 import argparse
 
 
-def parseDem(file):
-    #Testing my local dem file (This can be on git it's not sensitive data)
-    demoFile = "./match730_003716174692134945057_0469028642_129.dem"
-    
+def parseDem(demoFile):
     #Set up the base parser info
     parser = DemoParser(demoFile)
     event_df = parser.parse_event("player_death", player=["X", "Y"], other=["total_rounds_played"])
