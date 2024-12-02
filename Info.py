@@ -11,8 +11,7 @@ def parseDem(demoFile):
     #List all events in the game
     events = parser.list_game_events()
     print(events)
-    print()
-    
+    print(parser.parse_header())
     #Setup map information or single information that might be needed
     gameInfo = []
     headers = parser.parse_header()
@@ -52,8 +51,6 @@ def parseDem(demoFile):
     for index, row in round_end_df.iterrows():
         roundEnd.append([row["tick"], row["tick"]/64, (row["tick"]/64)/60])
     
-    print(game_end_df[::2].values)
-    print(roundEnd)
     #roundEndTick = game_end_df["tick"].values[0]
     
     #roundStartTick = game_start_df["tick"].values[0]
@@ -98,7 +95,7 @@ def parseDem(demoFile):
         playerInfo[player]["jumps"] = len(jump_df.loc[jump_df["user_steamid"] == player])
         #Chat messages
         playerInfo[player]["messages"] = []
-        for iter, row in chat_df.loc[chat_df["user_steamid"] == player].iterrows():
+        for index, row in chat_df.loc[chat_df["user_steamid"] == player].iterrows():
             playerInfo[player]["messages"].append(row["chat_message"])
         
         
