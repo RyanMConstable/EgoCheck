@@ -11,7 +11,6 @@ def parseDem(demoFile):
     #List all events in the game
     events = parser.list_game_events()
     print(events)
-    print(parser.parse_header())
     #Setup map information or single information that might be needed
     gameInfo = []
     headers = parser.parse_header()
