@@ -6,6 +6,7 @@ def parseDem(demoFile):
     #Set up the base parser info
     parser = DemoParser(demoFile)
     event_df = parser.parse_event("player_death", player=["X", "Y"], other=["total_rounds_played"])
+    #print(event_df.loc[(event_df["total_rounds_played"])])
     ticks_df = parser.parse_ticks(["X", "Y"])
     
     #List all events in the game
@@ -94,9 +95,11 @@ def parseDem(demoFile):
         playerInfo[player]["jumps"] = len(jump_df.loc[jump_df["user_steamid"] == player])
         #Chat messages
         playerInfo[player]["messages"] = []
-        if chat_df != []:
+        try:
             for index, row in chat_df.loc[chat_df["user_steamid"] == player].iterrows():
                 playerInfo[player]["messages"].append(row["chat_message"])
+        except Exception as e:
+            print("Most likely an error where the chat_df doesn't exist")
         
         
     #Testing things
