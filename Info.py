@@ -94,8 +94,9 @@ def parseDem(demoFile):
         playerInfo[player]["jumps"] = len(jump_df.loc[jump_df["user_steamid"] == player])
         #Chat messages
         playerInfo[player]["messages"] = []
-        for index, row in chat_df.loc[chat_df["user_steamid"] == player].iterrows():
-            playerInfo[player]["messages"].append(row["chat_message"])
+        if chat_df != []:
+            for index, row in chat_df.loc[chat_df["user_steamid"] == player].iterrows():
+                playerInfo[player]["messages"].append(row["chat_message"])
         
         
     #Testing things
