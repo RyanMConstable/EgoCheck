@@ -11,7 +11,22 @@ def parseDem(demoFile):
     
     #List all events in the game
     events = parser.list_game_events()
-    print(events)
+    #print(events)
+    testList = [
+        "round_announce_match_start",
+        "cs_round_start_beep",
+        "buytime_ended",
+        "announce_phase_end",
+        "round_announce_last_round_half",
+        "round_prestart",
+        "begin_new_match",
+        "round_announce_match_point",
+        "round_freeze_end",
+        "round_poststart",
+        "round_time_warning",
+        "round_officially_ended",
+    ]
+    
     #Setup map information or single information that might be needed
     gameInfo = []
     headers = parser.parse_header()
